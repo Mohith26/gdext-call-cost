@@ -1,0 +1,6 @@
+project/bin/
+project/.godot/
+*.os
+*.o
+*.log
+.sconsign*.dblite
