@@ -60,7 +60,10 @@ git clone --recursive https://github.com/Mohith26/gdext-call-cost
 cd gdext-call-cost
 pip install scons
 scons platform=macos target=template_release build_profile=build_profile.json
+godot --headless --path project --import   # registers the extension in project/.godot/extension_list.cfg
 godot --headless --path project --script res://bench.gd
 ```
+
+On my Mac, the official 4.7.2 editor crashed with signal 11 while shutting down after `--import`. It did the same with godot-cpp's own test project, and not with an empty project, so it seems to happen whenever the editor has a GDExtension loaded, not because of this extension in particular. The import still writes `extension_list.cfg` before the crash, and the benchmark runs and exits cleanly.
 
 The `.gdextension` file points both debug and release at the release build, since the official editor binary loads the debug entry. Only macOS was tested.
